@@ -218,8 +218,7 @@
 
   document.addEventListener('keydown', function(event) {
     // Check if the Enter key was pressed
-    const active = document.activeElement;
-    if (event.key === 'Enter' && (active.id === 'common-input' || active.id === 'botanical-input')) {
+    if (event.key === 'Enter') {
       const checkBtn = document.getElementById('check-btn');
       const nextBtn = document.getElementById('next-btn');
       
