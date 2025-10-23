@@ -56,6 +56,9 @@
     margin-top: 10px;
     font-weight: bold;
   }
+  .restart {
+    color: #2c7be5;
+  }
 </style>
 </head>
 <body>
@@ -79,139 +82,140 @@
 </div>
 
 <script>
-const flowers = [
-  {common: ["Carnation"], botanical: "Dianthus"},
-  {common: ["Daisy","Cushion Pom"], botanical: "Chrysanthemum"},
-  {common: ["Rose"], botanical: "Rosa"},
-  {common: ["Alstro","Lily of the Incas","Peruvian Lily"], botanical: "Alstroemeria"},
-  {common: ["Lisianthus"], botanical: "Eustoma"},
-  {common: ["Hydrangea"], botanical: "Hydrangea"},
-  {common: ["Peony"], botanical: "Paeonia"},
-  {common: ["Ranunculus"], botanical: "Ranunculus"},
-  {common: ["Safari Sunset"], botanical: "Leucadendron"},
-  {common: ["China Aster","Crown Aster","Matsomoto Aster"], botanical: "Callistephus"},
-  {common: ["Snapdragon"], botanical: "Antirrhinum"},
-  {common: ["Larkspur"], botanical: "Consolida"},
-  {common: ["Delphinium"], botanical: "Delphinium"},
-  {common: ["Liatris"], botanical: "Liatris"},
-  {common: ["Gladiola"], botanical: "Gladiolus"},
-  {common: ["Stock"], botanical: "Matthiola"},
-  {common: ["Bells of Ireland"], botanical: "Moluccella"},
-  {common: ["Baby Blue Eucalyptus"], botanical: "Eucalyptus"},
-  {common: ["Curly willow"], botanical: "Salix"},
-  {common: ["Dendrobium Orchid"], botanical: "Dendrobium"},
-  {common: ["Solidago"], botanical: "Solidago"},
-  {common: ["Misty Blue","Caspia"], botanical: "Limonium"},
-  {common: ["Statice"], botanical: "Limonium"},
-  {common: ["Queen Anne's Lace"], botanical: "Ammi"},
-  {common: ["Babies Breath","Gyp"], botanical: "Gypsophila"},
-  {common: ["Waxflower"], botanical: "Chamelaucium"},
-  {common: ["Spray Carnation","Mini Carnation","Pixie Carnation"], botanical: "Dianthus"},
-  {common: ["Aster"], botanical: "Aster"},
-  {common: ["Hypericum Berries"], botanical: "Hypericum"},
-  {common: ["Sea Holly"], botanical: "Eryngium"},
-  {common: ["Sunflower"], botanical: "Helianthus"},
-  {common: ["Calla Lily"], botanical: "Zantedeschia"},
-  {common: ["Tulip"], botanical: "Tulipa"},
-  {common: ["Bird of Paradise"], botanical: "Strelitzia"},
-  {common: ["Disbud Mum"], botanical: "Chrysanthemum"},
-  {common: ["Lily"], botanical: "Lilium"},
-  {common: ["Billy Balls"], botanical: "Craspedia"},
-  {common: ["Anthurium"], botanical: "Anthurium"},
-  {common: ["Iris"], botanical: "Iris"},
-  {common: ["Gerber Daisy"], botanical: "Gerbera"},
-  {common: ["Leather Leaf"], botanical: "Rumohra"},
-  {common: ["Bear Grass"], botanical: "Xerophyllum"},
-  {common: ["Lily Grass"], botanical: "Liriope"},
-  {common: ["Seeded Euc", "Seeded Eucalyptus"], botanical: "Eucalyptus"},
-  {common: ["Israeli Ruscus"], botanical: "Ruscus"},
-  {common: ["Salal","Lemon Leaf"], botanical: "Gaultheria"},
-  {common: ["Grevillea"], botanical: "Grevillea"},
-  {common: ["Pitt"], botanical: "Pittosporum"},
-  {common: ["Myrtle"], botanical: "Myrtus"},
-  {common: ["Italian Ruscus"], botanical: "Ruscus"},
-];
+  const flowers = [
+    {common: ["Carnation"], botanical: "Dianthus"},
+    {common: ["Daisy","Cushion Pom"], botanical: "Chrysanthemum"},
+    {common: ["Rose"], botanical: "Rosa"},
+    {common: ["Alstro","Lily of the Incas","Peruvian Lily"], botanical: "Alstroemeria"},
+    {common: ["Lisianthus"], botanical: "Eustoma"},
+    {common: ["Hydrangea"], botanical: "Hydrangea"},
+    {common: ["Peony"], botanical: "Paeonia"},
+    {common: ["Ranunculus"], botanical: "Ranunculus"},
+    {common: ["Safari Sunset"], botanical: "Leucadendron"},
+    {common: ["China Aster","Crown Aster","Matsomoto Aster"], botanical: "Callistephus"},
+    {common: ["Snapdragon"], botanical: "Antirrhinum"},
+    {common: ["Larkspur"], botanical: "Consolida"},
+    {common: ["Delphinium"], botanical: "Delphinium"},
+    {common: ["Liatris"], botanical: "Liatris"},
+    {common: ["Gladiola"], botanical: "Gladiolus"},
+    {common: ["Stock"], botanical: "Matthiola"},
+    {common: ["Bells of Ireland"], botanical: "Moluccella"},
+    {common: ["Baby Blue Eucalyptus"], botanical: "Eucalyptus"},
+    {common: ["Curly willow"], botanical: "Salix"},
+    {common: ["Dendrobium Orchid"], botanical: "Dendrobium"},
+    {common: ["Solidago"], botanical: "Solidago"},
+    {common: ["Misty Blue","Caspia"], botanical: "Limonium"},
+    {common: ["Statice"], botanical: "Limonium"},
+    {common: ["Queen Anne's Lace"], botanical: "Ammi"},
+    {common: ["Babies Breath","Gyp"], botanical: "Gypsophila"},
+    {common: ["Waxflower"], botanical: "Chamelaucium"},
+    {common: ["Spray Carnation","Mini Carnation","Pixie Carnation"], botanical: "Dianthus"},
+    {common: ["Aster"], botanical: "Aster"},
+    {common: ["Hypericum Berries"], botanical: "Hypericum"},
+    {common: ["Sea Holly"], botanical: "Eryngium"},
+    {common: ["Sunflower"], botanical: "Helianthus"},
+    {common: ["Calla Lily"], botanical: "Zantedeschia"},
+    {common: ["Tulip"], botanical: "Tulipa"},
+    {common: ["Bird of Paradise"], botanical: "Strelitzia"},
+    {common: ["Disbud Mum"], botanical: "Chrysanthemum"},
+    {common: ["Lily"], botanical: "Lilium"},
+    {common: ["Billy Balls"], botanical: "Craspedia"},
+    {common: ["Anthurium"], botanical: "Anthurium"},
+    {common: ["Iris"], botanical: "Iris"},
+    {common: ["Gerber Daisy"], botanical: "Gerbera"},
+    {common: ["Leather Leaf"], botanical: "Rumohra"},
+    {common: ["Bear Grass"], botanical: "Xerophyllum"},
+    {common: ["Lily Grass"], botanical: "Liriope"},
+    {common: ["Seeded Euc", "Seeded Eucalyptus"], botanical: "Eucalyptus"},
+    {common: ["Israeli Ruscus"], botanical: "Ruscus"},
+    {common: ["Salal","Lemon Leaf"], botanical: "Gaultheria"},
+    {common: ["Grevillea"], botanical: "Grevillea"},
+    {common: ["Pitt"], botanical: "Pittosporum"},
+    {common: ["Myrtle"], botanical: "Myrtus"},
+    {common: ["Italian Ruscus"], botanical: "Ruscus"},
+  ];
 
-let current = 0;
-let score = 0;
-let missed = [];
+  let current = 0;
+  let score = 0;
+  let missed = [];
 
-function loadQuestion() {
-  document.getElementById('question-number').innerText = current + 1;
-  document.getElementById('flower-image').src = `images/${current + 1}.jpg`; // placeholder path
-  document.getElementById('common-input').value = "";
-  document.getElementById('botanical-input').value = "";
-  document.getElementById('feedback').innerText = "";
-  document.getElementById('check-btn').style.display = 'inline-block';
-  document.getElementById('next-btn').style.display = 'none';
-  document.getElementById('common-input').focus();
-}
-
-document.getElementById('check-btn').addEventListener('click', () => {
-  const commonInput = document.getElementById('common-input').value.trim();
-  const botanicalInput = document.getElementById('botanical-input').value.trim();
-  const flower = flowers[current];
-
-  const commonCorrect = flower.common.some(name => name.toLowerCase() === commonInput.toLowerCase());
-  const botanicalCorrect = flower.botanical === botanicalInput;
-
-  if (commonCorrect && botanicalCorrect) {
-    score ++;
-    document.getElementById('feedback').innerText = "✅ Correct!";
-    document.getElementById('feedback').style.color = "green";
-  } else {
-    missed.push({
-        number: current + 1,
-        userCommon: commonInput,
-        userBotanical: botanicalInput,
-        correctCommon: flower.common.join(", "),
-        correctBotanical: flower.botanical
-    });
-    document.getElementById('feedback').innerHTML = 
-      `❌ Incorrect.<br>Common: ${flower.common.join(", ")}<br>Botanical: ${flower.botanical}`;
-    document.getElementById('feedback').style.color = "red";
+  function loadQuestion() {
+    document.getElementById('question-number').innerText = current + 1;
+    document.getElementById('flower-image').src = `images/${current + 1}.jpg`; // placeholder path
+    document.getElementById('common-input').value = "";
+    document.getElementById('botanical-input').value = "";
+    document.getElementById('feedback').innerText = "";
+    document.getElementById('check-btn').style.display = 'inline-block';
+    document.getElementById('next-btn').style.display = 'none';
+    document.getElementById('common-input').focus();
   }
 
-  document.getElementById('check-btn').style.display = 'none';
-  document.getElementById('next-btn').style.display = 'inline-block';
-});
+  document.getElementById('check-btn').addEventListener('click', () => {
+    const commonInput = document.getElementById('common-input').value.trim();
+    const botanicalInput = document.getElementById('botanical-input').value.trim();
+    const flower = flowers[current];
 
-document.getElementById('next-btn').addEventListener('click', () => {
-  current++;
-  if (current < flowers.length) {
-    loadQuestion();
-  } else {
-    let resultHTML = `<h2>🎉 You've completed the quiz!</h2>
-    <p>Your score: <strong>${score} / ${flowers.length}</strong></p>`;
+    const commonCorrect = flower.common.some(name => name.toLowerCase() === commonInput.toLowerCase());
+    const botanicalCorrect = flower.botanical === botanicalInput;
 
-    if (missed.length > 0) {
-    resultHTML += `<h3>❌ Flowers You Missed:</h3><ol>`;
-    missed.forEach(item => {
-        resultHTML += `<li>
-        <strong>Question ${item.number}</strong><br>
-        Your answer — Common: <em>${item.userCommon || "(blank)"}</em>,
-        Botanical: <em>${item.userBotanical || "(blank)"}</em><br>
-        Correct — Common: <strong>${item.correctCommon}</strong>,
-        Botanical: <strong>${item.correctBotanical}</strong>
-        </li>`;
-    });
-    resultHTML += `</ol>`;
+    if (commonCorrect && botanicalCorrect) {
+      score ++;
+      document.getElementById('feedback').innerText = "✅ Correct!";
+      document.getElementById('feedback').style.color = "green";
     } else {
-    resultHTML += `<p>🌟 Perfect score! You got them all right!</p>`;
+      missed.push({
+          number: current + 1,
+          userCommon: commonInput,
+          userBotanical: botanicalInput,
+          correctCommon: flower.common.join(", "),
+          correctBotanical: flower.botanical
+      });
+      document.getElementById('feedback').innerHTML = 
+        `❌ Incorrect.<br>Common: ${flower.common.join(", ")}<br>Botanical: ${flower.botanical}`;
+      document.getElementById('feedback').style.color = "red";
     }
 
-    resultHTML += `<p>Restart quiz by refreshing the page</p>`;
-    document.querySelector('.quiz-box').innerHTML = resultHTML;  }
-});
+    document.getElementById('check-btn').style.display = 'none';
+    document.getElementById('next-btn').style.display = 'inline-block';
+  });
 
-loadQuestion();
+  document.getElementById('next-btn').addEventListener('click', () => {
+    current++;
+    if (current < flowers.length) {
+      loadQuestion();
+    } else {
+      let resultHTML = `<h2>🎉 You've completed the quiz!</h2>
+      <p>Your score: <strong>${score} / ${flowers.length}</strong></p>`;
 
-function restartQuiz() {
-  current = 0;
-  score = 0;
-  missed = [];
+      if (missed.length > 0) {
+      resultHTML += `<h3>❌ Flowers You Missed:</h3><ol>`;
+      missed.forEach(item => {
+          resultHTML += `<li>
+          <strong>Question ${item.number}</strong><br>
+          Your answer — Common: <em>${item.userCommon || "(blank)"}</em>,
+          Botanical: <em>${item.userBotanical || "(blank)"}</em><br>
+          Correct — Common: <strong>${item.correctCommon}</strong>,
+          Botanical: <strong>${item.correctBotanical}</strong>
+          </li>`;
+      });
+      resultHTML += `</ol>`;
+      } else {
+      resultHTML += `<p>🌟 Perfect score! You got them all right!</p>`;
+      }
+
+      resultHTML += `<p class="restart">Restart quiz by refreshing the page</p>`;
+      document.querySelector('.quiz-box').innerHTML = resultHTML;  }
+  });
+
   loadQuestion();
-}
+
+  function restartQuiz() {
+    current = 0;
+    score = 0;
+    missed = [];
+    loadQuestion();
+  }
+
   document.addEventListener('keydown', function(event) {
     // Check if the Enter key was pressed
     const active = document.activeElement;
