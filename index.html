@@ -144,6 +144,7 @@ function loadQuestion() {
   document.getElementById('feedback').innerText = "";
   document.getElementById('check-btn').style.display = 'inline-block';
   document.getElementById('next-btn').style.display = 'none';
+  document.getElementById('common-input').focus();
 }
 
 document.getElementById('check-btn').addEventListener('click', () => {
@@ -213,7 +214,8 @@ function restartQuiz() {
 }
   document.addEventListener('keydown', function(event) {
     // Check if the Enter key was pressed
-    if (event.key === 'Enter') {
+    const active = document.activeElement;
+    if (event.key === 'Enter' && (active.id === 'common-input' || active.id === 'botanical-input')) {
       const checkBtn = document.getElementById('check-btn');
       const nextBtn = document.getElementById('next-btn');
       
