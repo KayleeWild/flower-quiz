@@ -211,6 +211,22 @@ function restartQuiz() {
   missed = [];
   loadQuestion();
 }
+  document.addEventListener('keydown', function(event) {
+    // Check if the Enter key was pressed
+    if (event.key === 'Enter') {
+      const checkBtn = document.getElementById('check-btn');
+      const nextBtn = document.getElementById('next-btn');
+      
+      // If the check button is visible, trigger it
+      if (checkBtn && checkBtn.style.display !== 'none') {
+        checkBtn.click();
+      } 
+      // Otherwise, if the next button is visible, trigger that
+      else if (nextBtn && nextBtn.style.display !== 'none') {
+        nextBtn.click();
+      }
+    }
+  });
 
 </script>
 
