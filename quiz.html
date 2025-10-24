@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flower Quiz</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🌺</text></svg>">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1 id="quiz-title">Flower Quiz</h1>
+    <div class="quiz-box" id="quiz-box">
+      <img id="flower-image" class="quiz-img" src="images/placeholder.png" alt="Flower image" loading="lazy">
+      
+      <p><strong>Question <span id="question-number">1</span></strong></p>
+      
+      <input id="common-input" type="text" placeholder="Enter common name" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false">
+      <br>
+      <input id="botanical-input" type="text" placeholder="Enter botanical name" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false">
+      <br>
+      
+      <button id="check-btn">Check Answer</button>
+      <button id="next-btn" style="display:none;">Next Flower</button>
+      
+      <p id="feedback"></p>
+    </div>
+
+    <script src="quizzes.js"></script>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const start = parseInt(params.get('start')) - 1;
+        const end = parseInt(params.get('end'));
+        const title = params.get('title');
+        document.getElementById('quiz-title').innerText = title;
+
+        const quizFlowers = flowers.slice(start, end);
+        let current = 0, score = 0, missed = [];
+
+        function loadQuestion() {
+            const flower = quizFlowers[current];
+            document.getElementById('question-number').innerText = current + 1;
+            document.getElementById('flower-image').src = `images/${start + current + 1}.jpg`;
+            document.getElementById('common-input').value = "";
+            document.getElementById('botanical-input').value = "";
+            document.getElementById('feedback').innerText = "";
+            document.getElementById('check-btn').style.display = 'inline-block';
+            document.getElementById('next-btn').style.display = 'none';
+            document.getElementById('common-input').focus();
+        }
+
+        function checkAnswer() {
+            const commonInput = document.getElementById('common-input').value.trim();
+            const botanicalInput = document.getElementById('botanical-input').value.trim();
+            const flower = quizFlowers[current];
+
+            const commonCorrect = flower.common.some(name => name.toLowerCase() === commonInput.toLowerCase());
+            const botanicalCorrect = flower.botanical === botanicalInput;
+
+            if (commonCorrect && botanicalCorrect) {
+            score++;
+            document.getElementById('feedback').innerText = "✅ Correct!";
+            document.getElementById('feedback').style.color = "green";
+            } else {
+            missed.push({
+                number: current + 1,
+                userCommon: commonInput,
+                userBotanical: botanicalInput,
+                correctCommon: flower.common.join(", "),
+                correctBotanical: flower.botanical
+            });
+            document.getElementById('feedback').innerHTML = `❌ Incorrect.<br>Common: ${flower.common.join(", ")}<br>Botanical: ${flower.botanical}`;
+            document.getElementById('feedback').style.color = "red";
+            }
+
+            document.getElementById('check-btn').style.display = 'none';
+            document.getElementById('next-btn').style.display = 'inline-block';
+        }
+
+        function nextQuestion() {
+            current++;
+            if (current < quizFlowers.length) {
+            loadQuestion();
+            } else {
+            let resultHTML = `<h2>🎉 You've completed the quiz!</h2><p>Your score: <strong>${score} / ${quizFlowers.length}</strong></p>`;
+            if (missed.length > 0) {
+                resultHTML += `<h3>❌ Flowers You Missed:</h3><ol>`;
+                missed.forEach(item => {
+                resultHTML += `<li><strong>Question ${item.number}</strong><br>
+                Your answer — Common: <em>${item.userCommon || "(blank)"}</em>,
+                Botanical: <em>${item.userBotanical || "(blank)"}</em><br>
+                Correct — Common: <strong>${item.correctCommon}</strong>,
+                Botanical: <strong>${item.correctBotanical}</strong></li>`;
+                });
+                resultHTML += `</ol>`;
+            } else {
+                resultHTML += `<p>🌟 Perfect score! You got them all right!</p>`;
+            }
+            document.getElementById('quiz-box').innerHTML = resultHTML;
+            }
+        }
+
+        document.getElementById('check-btn').addEventListener('click', checkAnswer);
+        document.getElementById('next-btn').addEventListener('click', nextQuestion);
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+            const checkBtn = document.getElementById('check-btn');
+            const nextBtn = document.getElementById('next-btn');
+            if (checkBtn.style.display !== 'none') checkBtn.click();
+            else if (nextBtn.style.display !== 'none') nextBtn.click();
+            }
+        });
+
+        loadQuestion();
+    </script>
+    <button onclick="window.location.href='index.html'" id="back-to-home">🏠 Back to Home</button>
+</body>
+</html>
